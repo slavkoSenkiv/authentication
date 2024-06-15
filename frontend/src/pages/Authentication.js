@@ -10,7 +10,6 @@ export default AuthenticationPage;
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get('mode') || 'login';
-  //const mode = searchParams.get('mode') || 'signup';
 
   if (mode !== 'login' && mode !== 'signup') {
     throw json({ message: 'Unsupported mode.' }, { status: 422 });
@@ -21,6 +20,7 @@ export async function action({ request }) {
     email: data.get('email'),
     password: data.get('password'),
   };
+
   const response = await fetch('http://localhost:8080/' + mode, {
     method: 'POST',
     headers: {
@@ -32,15 +32,16 @@ export async function action({ request }) {
   if (response.status === 422 || response.status === 401) {
     return response;
   }
+
   if (!response.ok) {
     throw json({ message: 'Could not authenticate user.' }, { status: 500 });
   }
 
   const resData = await response.json();
-  const tocken = resData.token;
-  localStorage.setItem('tocken', tocken);
+  const token = resData.token;
+  localStorage.setItem('token', token);
   const expiration = new Date();
-  expiration.setHours(expiration.getDateHours() + 1);
+  expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem('expiration', expiration.toISOString());
   return redirect('/');
 }

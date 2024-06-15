@@ -1,8 +1,8 @@
 import {
   Form,
   Link,
-  useActionData,
   useSearchParams,
+  useActionData,
   useNavigation,
 } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ function AuthForm() {
             {isLogin ? 'Create new user' : 'Login'}
           </Link>
           <button disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting ...' : 'Save'}
+            {isSubmitting ? 'Submitting...' : 'Save'}
           </button>
         </div>
       </Form>

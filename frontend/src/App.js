@@ -13,19 +13,19 @@ import NewEventPage from './pages/NewEvent';
 import RootLayout from './pages/Root';
 import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
-import {action as logoutAction} from './pages/Logout';
 import AuthenticationPage, {
   action as authAction,
-  } from './pages/Authentication';
-import { checkAuthLoader, tockenLoader } from './util/auth';
-  
+} from './pages/Authentication';
+import { action as logoutAction } from './pages/Logout';
+import { checkAuthLoader, tokenLoader } from './util/auth';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     id: 'root',
-    loader: tockenLoader,
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -51,8 +51,7 @@ const router = createBrowserRouter([
                 path: 'edit',
                 element: <EditEventPage />,
                 action: manipulateEventAction,
-                loader: checkAuthLoader
-
+                loader: checkAuthLoader,
               },
             ],
           },
@@ -60,14 +59,14 @@ const router = createBrowserRouter([
             path: 'new',
             element: <NewEventPage />,
             action: manipulateEventAction,
-            loader: checkAuthLoader
+            loader: checkAuthLoader,
           },
         ],
       },
       {
         path: 'auth',
         element: <AuthenticationPage />,
-        action: authAction, 
+        action: authAction,
       },
       {
         path: 'newsletter',
@@ -75,9 +74,9 @@ const router = createBrowserRouter([
         action: newsletterAction,
       },
       {
-        path: 'logout', 
-        action: logoutAction
-      }
+        path: 'logout',
+        action: logoutAction,
+      },
     ],
   },
 ]);

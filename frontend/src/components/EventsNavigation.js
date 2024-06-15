@@ -3,7 +3,7 @@ import { NavLink, useRouteLoaderData } from 'react-router-dom';
 import classes from './EventsNavigation.module.css';
 
 function EventsNavigation() {
-  const tocken = useRouteLoaderData('root');
+  const token = useRouteLoaderData('root');
   return (
     <header className={classes.header}>
       <nav>
@@ -19,7 +19,7 @@ function EventsNavigation() {
               All Events
             </NavLink>
           </li>
-          {tocken && (
+          {token && (
             <li>
               <NavLink
                 to="/events/new"
